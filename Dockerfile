@@ -10,9 +10,11 @@ ENV         OPENSSH_VERSION=${OPENSSH_VERSION} \
 
 ADD         entrypoint.sh /
 RUN         apk update && apk upgrade && apk add openssh=${OPENSSH_VERSION} \
+				&& apk add git \
+				&& apk add bash \
 		        && chmod +x /entrypoint.sh \
 		        && mkdir -p /root/.ssh \
-		        && rm -rf /var/cache/apk/* /tmp/*
+			&& rm -rf /var/cache/apk/* /tmp/* 
 
 EXPOSE      22
 VOLUME      ["/etc/ssh"]
